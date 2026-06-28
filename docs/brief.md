@@ -1,103 +1,106 @@
 ﻿# APIGuardian Brief
 
-## One-line summary
+## One-line Summary
 
-Protect APIs with contract checks, policy rules, auth validation, and runtime risk reports.
+Check whether an API is production-ready across contracts, security, errors, rate limits, OpenAPI, versioning, and auditability.
 
-## Product category
+## Category
 
-API governance and security
+API Contract / Security Checker
 
-## Background
+## Priority
 
-AI-assisted work is becoming normal inside engineering, product, operations, and go-to-market teams, but most teams still rely on scattered prompts, one-off scripts, informal checklists, and undocumented decisions. The result is speed without enough repeatability. APIGuardian should provide a focused product surface for one important workflow, with enough structure to support real delivery rather than a temporary demo.
+Phase 3 / enterprise governance
 
-## Problem statement
+## Product Context
 
-The target user needs to complete API governance and security work with confidence. Today they typically face:
+This project belongs to the public Cerebra Forge Labs / ForgeOps Labs product idea set. The public repository should present APIGuardian as an independent product that people can understand and use, while the deeper Cerebra MCP layer can be used internally for orchestration, review, testing, security, DevOps, and context governance.
 
-- unclear input requirements before work starts
-- inconsistent output quality between runs or team members
-- weak traceability from source material to final decisions
-- manual review steps that are not captured as evidence
-- security and permission questions discovered too late
-- no standard handoff format for engineering, operations, or stakeholders
+## Product Concept
 
-## Target users
+A developer tool that inspects API specifications and live endpoints for endpoint naming, OpenAPI quality, schemas, error formats, auth, rate limits, pagination, idempotency, validation, audit logging, and versioning.
 
-Primary users: backend teams, platform security, API product owners.
+## Why It Should Exist
 
-Secondary users:
+It is enterprise-friendly and maps to standards that matter for governed platforms: standard error shape, RBAC, audit logs, rate limits, and versioning.
 
-- engineering managers who approve adoption
-- security or compliance reviewers who need auditability
-- implementation teams who turn product output into shipped systems
-- operators who maintain the workflow after launch
+The market need is practical: teams want AI-assisted systems that move beyond prompts and demos into repeatable workflows, validated outputs, and handoff-ready artifacts. APIGuardian should make that workflow explicit and useful from the first release.
 
-## Core promise
+## Target Users
 
-APIGuardian helps users move from messy inputs to a reviewed, actionable output through a repeatable workflow. The product should feel practical, governed, and implementation-ready. It should not feel like a generic chatbot.
+backend teams, API platform teams, AppSec engineers, technical leads, integration owners
+
+## Primary Job To Be Done
+
+When a user needs api contract / security checker work, they should be able to provide the minimum required context, run the workflow, inspect the result, and leave with a usable output package rather than vague advice.
+
+## Inputs
+
+OpenAPI file, base URL, auth config, policy profile, sample requests, CI context
+
+## Outputs
+
+API readiness score, contract findings, security findings, breaking-change warnings, policy report
+
+## Core Capabilities
+
+- OpenAPI import
+- contract linting
+- live endpoint probes
+- auth and rate-limit checks
+- error shape validation
+- pagination/idempotency checks
+- audit coverage report
+- CI gate mode
+
+## Cerebra MCP Fit
+
+Recommended Cerebra MCP capabilities:
+
+CerebraSecurity-mcp, CerebraReview-mcp, CerebraTesting-mcp, CerebraDevops-mcp
+
+Cerebra should be used as the behind-the-scenes quality layer for role selection, context composition, risk checks, review, testing, security, and delivery evidence. The public product should not require users to understand Cerebra internals before they can get value.
+
+## MVP Experience
+
+1. User creates a project or run.
+2. User provides required inputs.
+3. System validates missing or risky information.
+4. System generates or audits the target artifact.
+5. User reviews output, warnings, assumptions, and next steps.
+6. User exports or saves the result.
 
 ## Differentiation
 
-- Opinionated workflow for API governance and security, not a blank prompt box.
-- Built-in evidence capture and approval points.
-- Clear separation between draft AI output and verified deliverables.
-- Integration-ready design for real team tools.
-- Requirements and delivery checkpoints included from the beginning.
+- Product-specific workflow, not a generic chatbot.
+- Concrete outputs that can be committed, deployed, tested, or reviewed.
+- Quality gates that make generated work safer to trust.
+- Clear traceability from inputs to output.
+- Practical public repo structure that invites adoption and contribution.
 
-## MVP scope
+## Success Metrics
 
-The MVP must include:
+- First useful result is produced in under 10 minutes for a new user.
+- At least 80 percent of MVP runs produce an exportable artifact.
+- Generated outputs require fewer than three major manual corrections in normal use.
+- Users can understand setup and usage from the README without private context.
+- The project can be demonstrated publicly with safe sample data.
 
-- workspace and project setup
-- guided intake for the core workflow
-- structured data model for inputs, runs, outputs, risks, and approvals
-- AI-assisted generation or analysis step where it adds leverage
-- manual review and revision controls
-- export or handoff to common delivery formats
-- audit log for important user, AI, and system actions
-- basic admin settings for roles, integrations, and retention
+## Non-goals
 
-The MVP should not include:
+- Do not expose private Cerebra internals as a requirement for public use.
+- Do not automate destructive or external actions without explicit approval.
+- Do not build broad marketplace features before the core workflow works.
+- Do not ship AI output without assumptions, risks, and validation status.
 
-- marketplace features
-- complex multi-tenant billing
-- custom plugin SDK unless required by the core workflow
-- enterprise SSO beyond a clean abstraction
-- unlimited automation without review gates
+## Recommended MVP Stack
 
-## Key workflows
+OpenAPI 3.1 parser, HTTP probe runner, policy engine, CLI and web report
 
-### 1. Create workspace
+## Key Risks
 
-The user creates a workspace, names the project, chooses a template, and configures basic privacy settings.
+probing unsafe environments, false blocking in CI, credential handling, incomplete API inventory
 
-### 2. Capture inputs
+## Launch Recommendation
 
-The user adds the source material needed for APIGuardian: text, files, repository links, API specs, workflow descriptions, test cases, or integration details depending on the use case.
-
-### 3. Run guided analysis
-
-The system validates inputs, identifies missing information, applies policy checks, and produces draft output with assumptions clearly separated from verified facts.
-
-### 4. Review and approve
-
-The user reviews the result, edits the output, resolves warnings, and records approval or rejection.
-
-### 5. Deliver
-
-The system exports the final package as Markdown, JSON, issue tickets, repository files, or integration-specific payloads.
-
-## Success metrics
-
-- time from intake to first useful output
-- percentage of runs with all required inputs completed
-- number of review warnings resolved before delivery
-- user acceptance rate for generated drafts
-- repeat usage by the same workspace within 30 days
-- reduction in manual handoff clarification requests
-
-## Positioning statement
-
-For backend teams, platform security, API product owners, APIGuardian is a API governance and security that converts unstructured work into verified, handoff-ready outputs. Unlike generic AI assistants, it includes workflow state, review gates, audit trails, and implementation-focused documentation.
+Ship the first version as a focused public repo with clear docs, sample input, sample output, and a small runnable path. Treat broader integrations as phase two unless they are essential to proving the product.
